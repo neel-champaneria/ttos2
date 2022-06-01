@@ -91,7 +91,7 @@ const makeStore = ({ isServer }) => {
         "resReducer",
         "orderingItemReducer",
         "openAPIKeyManagementReducer",
-        "QrReducer",
+        // "QrReducer",
       ],
       storage,
     };

@@ -20,10 +20,10 @@ class ApiResource {
       //   tenantUrl = "staging2.ellieeats.sg";
       if (
         window.location.hostname === "localhost" ||
-        window.location.hostname === "ttos2.vercel.app"
+        window.location.hostname === "ttos-dev.ellieeats.sg"
       ) {
-        baseUrl = process.env.NEXT_PUBLIC_STAGING4_BASE_URL;
-        tenantUrl = process.env.NEXT_PUBLIC_STAGING4_TENANT_URL;
+        baseUrl = process.env.NEXT_PUBLIC_STAGING3_BASE_URL;
+        tenantUrl = process.env.NEXT_PUBLIC_STAGING3_TENANT_URL;
       } else {
         let hostname = window.location.hostname;
         baseUrl = process.env.NEXT_PUBLIC_BASE_URL.replace(
@@ -52,10 +52,10 @@ class ApiResource {
       //     "$2a$10$5wQ.RXhOZd7NWQ54Z5q/DuOhD9MfKFbsmX/t5Eo7bO0qPoWCShOdK";
       if (
         window.location.hostname === "localhost" ||
-        window.location.hostname === "ttos2.vercel.app"
+        window.location.hostname === "ttos-dev.ellieeats.sg"
       ) {
-        const API_key = process.env.NEXT_PUBLIC_STAGING4_API_KEY;
-        const secret_key = process.env.NEXT_PUBLIC_STAGING4_SECRET_KEY;
+        const API_key = process.env.NEXT_PUBLIC_STAGING3_API_KEY;
+        const secret_key = process.env.NEXT_PUBLIC_STAGING3_SECRET_KEY;
         const api_secret = API_key + ":" + secret_key;
         const base64 = btoa(api_secret);
         request.headers["x-client-key"] = "Basic " + base64;

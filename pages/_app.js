@@ -32,10 +32,10 @@ function MyApp({ Component, pageProps, router }) {
     dispatch(fetchAppConfig());
   }, [dispatch]); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     localStorage.removeItem("persist:nextjs");
     localStorage.removeItem("persist:resReducer");
-  }, []);
+  }, []); */
 
   useEffect(() => {
     Money.init(storeConfig, taxConfig, promotions, user, paymentConfig || []);

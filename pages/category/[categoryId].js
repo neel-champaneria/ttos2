@@ -1,15 +1,20 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect, useState } from "react";
 import SearchedItemCompoent from "./../../src/components/menuComponents/SearchedItemComponent";
 import SingleItem from "../../src/components/menuComponents/SingleItem";
 
-import { Button, Navbar } from "react-bootstrap";
+import { Button, Navbar, Spinner } from "react-bootstrap";
+import {
+  fetchAppConfig,
+  fetchMenuAction,
+} from "./../../src/actions/MenuAction";
 
 const CategoryPage = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { query } = router;
 
@@ -25,8 +30,23 @@ const CategoryPage = () => {
   const [showSearchResult, setShowSearchResult] = useState(false);
   const [showSearchbar, setShowSearchbar] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (
+      Object.keys(qrInfo).length !== 0 &&
+      qrInfo.tableId &&
+      qrInfo.qrId &&
+      qrInfo.tableName
+    ) {
+      dispatch(fetchMenuAction(qrInfo.qrId));
+      dispatch(fetchAppConfig(qrInfo.qrId));
+    }
+  }, [qrInfo]);
+
   useEffect(() => {
     if (menu.length > 0) {
+      setLoading(true);
       const [currentCatogory] = menu.filter(
         (category) => category.id === parseInt(query.categoryId)
       );
@@ -36,7 +56,11 @@ const CategoryPage = () => {
       for (let i = 0; i < items.length; i += 2) {
         rows.push([items[i], i + 1 < items.length ? items[i + 1] : null]);
       }
-      setItemsRows(rows);
+      // setItemsRows(rows);
+      setItemsRows((prevState) => {
+        setLoading(false);
+        return rows;
+      });
     }
   }, [menu, query]);
 
@@ -67,6 +91,15 @@ const CategoryPage = () => {
 
   return (
     <>
+      {loading ? (
+        <>
+          <div className="container d-flex justify-content-center align-items-center vh-100">
+            <Spinner animation="border" variant="secondary" />
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       {category && itemRows && (
         <>
           {/* Table Number */}

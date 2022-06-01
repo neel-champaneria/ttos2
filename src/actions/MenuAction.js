@@ -61,11 +61,11 @@ export const fetchMenuAction = (qrId) => {
       });
       dispatch({ type: APP_IS_LOADING, payload: false });
       if (resp.error.qrExpire) {
-        window.location.replace("./qr-expired");
-        // console.log("menu qrExpire");
+        // window.location.replace("/qr-expired");
+        console.log("menu qrExpire");
       } else {
-        window.location.replace("./something-wrong");
-        // console.log("menu something-wrong");
+        // window.location.replace("/something-wrong");
+        console.log("menu something-wrong");
       }
     }
   };
@@ -86,9 +86,11 @@ export const fetchAppConfig = (qrId) => {
       });
     } else {
       if (resp.error.qrExpire) {
-        window.location.replace("./qr-expired");
+        console.log("error: restaurant qr expire");
+        // window.location.replace("/qr-expired");
       } else {
-        window.location.replace("./something-wrong");
+        console.log("error: restaurant something wrong");
+        // window.location.replace("/something-wrong");
       }
     }
   };

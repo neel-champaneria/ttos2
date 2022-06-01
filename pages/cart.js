@@ -99,7 +99,7 @@ const CartPage = () => {
           setLoading(false);
         } else {
           setShowErrorToast(true);
-          setToastErrorMsg("Something went wrong");
+          setToastErrorMsg(response.msg);
           setLoading(false);
         }
       }

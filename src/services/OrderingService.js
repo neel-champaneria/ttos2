@@ -20,7 +20,7 @@ export const checkoutTTOSService = async (data, qrId) => {
 export const getOrderByQRService = async (qrId) => {
   console.log("data >>>>>>>>>>>>>>>>>>>>>>>>>>>> : ", qrId);
   return await APIResource.get(
-    `open/api/slave/order/fetchMyOrders?qrid=${qrId}`,
+    `open/api/slave/order/fetchMyOrders?qrid=${qrId}&status=INIT`,
     {
       headers: {
         "qr-code": qrId,

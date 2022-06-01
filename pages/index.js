@@ -35,15 +35,15 @@ const Home = () => {
         router.query.qrId &&
         router.query.tableName
       ) {
-        if (Object.keys(qrInfo).length === 0) {
-          dispatch(
-            setQrInfoAction({
-              tableId: router.query.tableId,
-              qrId: router.query.qrId,
-              tableName: router.query.tableName,
-            })
-          );
-        }
+        // if (Object.keys(qrInfo).length === 0) {
+        dispatch(
+          setQrInfoAction({
+            tableId: router.query.tableId,
+            qrId: router.query.qrId,
+            tableName: router.query.tableName,
+          })
+        );
+        // }
         dispatch(fetchMenuAction(router.query.qrId));
         dispatch(fetchAppConfig(router.query.qrId));
       } else {
