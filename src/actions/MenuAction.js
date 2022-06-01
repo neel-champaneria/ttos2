@@ -86,7 +86,8 @@ export const fetchAppConfig = (qrId) => {
         type: APP_LOAD_CONFIGURATION_SUCCESS,
         payload: resp.jsonData,
       });
-    } else {
+    }
+    /* else {
       if (resp.error.qrExpire) {
         console.log("error: restaurant qr expire");
         // window.location.replace("/qr-expired");
@@ -94,7 +95,8 @@ export const fetchAppConfig = (qrId) => {
         console.log("error: restaurant something wrong");
         // window.location.replace("/something-wrong");
       }
-    }
+    } */
+    return resp;
   };
 };
 
