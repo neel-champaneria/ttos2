@@ -32,15 +32,37 @@ const CategoryPage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (
       Object.keys(qrInfo).length !== 0 &&
       qrInfo.tableId &&
       qrInfo.qrId &&
       qrInfo.tableName
     ) {
-      dispatch(fetchMenuAction(qrInfo.qrId));
-      dispatch(fetchAppConfig(qrInfo.qrId));
+      const menuResponse = await dispatch(fetchMenuAction(qrInfo.qrId));
+      const restaurantResponse = await dispatch(fetchAppConfig(qrInfo.qrId));
+      if (!menuResponse.status) {
+        if (menuResponse.error.qrExpire) {
+          // window.location.replace("/qr-expired");
+          router.replace("/qr-expired");
+          console.log("menu qrExpire");
+        } else {
+          // window.location.replace("/something-wrong");
+          router.replace("/something-wrong");
+          console.log("menu something-wrong");
+        }
+      }
+      if (!restaurantResponse.status) {
+        if (restaurantResponse.error.qrExpire) {
+          // window.location.replace("/qr-expired");
+          router.replace("/qr-expired");
+          console.log("menu qrExpire");
+        } else {
+          // window.location.replace("/something-wrong");
+          router.replace("/something-wrong");
+          console.log("menu something-wrong");
+        }
+      }
     }
   }, [qrInfo]);
 

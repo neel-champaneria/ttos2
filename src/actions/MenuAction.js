@@ -54,21 +54,19 @@ export const fetchMenuAction = (qrId) => {
         payload: resp.jsonData.orderAheadDays,
       });
       dispatch({ type: APP_IS_LOADING, payload: false });
-      return resp;
     } else {
       dispatch({
         type: FETCH_MENU_FAIL,
         payload: resp,
       });
       dispatch({ type: APP_IS_LOADING, payload: false });
-      return resp;
-      /* if (resp.error.qrExpire) {
-        // window.location.replace("/qr-expired");
-        console.log("menu qrExpire");
+      if (resp.error.qrExpire) {
+        window.location.replace("/qr-expired");
+        // console.log("menu qrExpire");
       } else {
-        // window.location.replace("/something-wrong");
-        console.log("menu something-wrong");
-      } */
+        window.location.replace("/something-wrong");
+        // console.log("menu something-wrong");
+      }
     }
   };
 };
@@ -86,17 +84,15 @@ export const fetchAppConfig = (qrId) => {
         type: APP_LOAD_CONFIGURATION_SUCCESS,
         payload: resp.jsonData,
       });
-    }
-    /* else {
+    } else {
       if (resp.error.qrExpire) {
-        console.log("error: restaurant qr expire");
-        // window.location.replace("/qr-expired");
+        // console.log("error: restaurant qr expire");
+        window.location.replace("/qr-expired");
       } else {
-        console.log("error: restaurant something wrong");
-        // window.location.replace("/something-wrong");
+        // console.log("error: restaurant something wrong");
+        window.location.replace("/something-wrong");
       }
-    } */
-    return resp;
+    }
   };
 };
 
