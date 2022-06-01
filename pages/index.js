@@ -26,7 +26,7 @@ const Home = () => {
 
   const [numOfCategory, setNumOfCategory] = useState(null);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (router.isReady) {
       console.log("_app.js: router ready");
       if (
@@ -44,13 +44,61 @@ const Home = () => {
           })
         );
         // }
-        dispatch(fetchMenuAction(router.query.qrId));
-        dispatch(fetchAppConfig(router.query.qrId));
+        const menuResponse = await dispatch(fetchMenuAction(router.query.qrId));
+        const restaurantResponse = await dispatch(
+          fetchAppConfig(router.query.qrId)
+        );
+        if (!menuResponse.status) {
+          if (menuResponse.error.qrExpire) {
+            // window.location.replace("/qr-expired");
+            router.replace("/qr-expired");
+            console.log("menu qrExpire");
+          } else {
+            // window.location.replace("/something-wrong");
+            router.replace("/something-wrong");
+            console.log("menu something-wrong");
+          }
+        }
+        if (!restaurantResponse.status) {
+          if (restaurantResponse.error.qrExpire) {
+            // window.location.replace("/qr-expired");
+            router.replace("/qr-expired");
+            console.log("menu qrExpire");
+          } else {
+            // window.location.replace("/something-wrong");
+            router.replace("/something-wrong");
+            console.log("menu something-wrong");
+          }
+        }
       } else {
         if (qrInfo && Object.keys(qrInfo).length !== 0) {
           if (qrInfo.qrId) {
-            dispatch(fetchMenuAction(qrInfo.qrId));
-            dispatch(fetchAppConfig(qrInfo.qrId));
+            const menuResponse = await dispatch(fetchMenuAction(qrInfo.qrId));
+            const restaurantResponse = await dispatch(
+              fetchAppConfig(qrInfo.qrId)
+            );
+            if (!menuResponse.status) {
+              if (menuResponse.error.qrExpire) {
+                // window.location.replace("/qr-expired");
+                router.replace("/qr-expired");
+                console.log("menu qrExpire");
+              } else {
+                // window.location.replace("/something-wrong");
+                router.replace("/something-wrong");
+                console.log("menu something-wrong");
+              }
+            }
+            if (!restaurantResponse.status) {
+              if (restaurantResponse.error.qrExpire) {
+                // window.location.replace("/qr-expired");
+                router.replace("/qr-expired");
+                console.log("menu qrExpire");
+              } else {
+                // window.location.replace("/something-wrong");
+                router.replace("/something-wrong");
+                console.log("menu something-wrong");
+              }
+            }
           }
         } else {
           router.replace("./qr-not-found");
