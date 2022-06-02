@@ -12,11 +12,25 @@ const securityHeaders = [
   },
 ];
 
-const path = require('path')
+module.exports = {
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      "/": { page: "/" },
+      "/cart": { page: "/cart" },
+      "/order": { page: "/order" },
+      "/category/[categoryId]": { page: "/category/[categoryId]" },
+    };
+  },
+};
+
+const path = require("path");
 
 module.exports = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, "styles")],
   },
 };
 
